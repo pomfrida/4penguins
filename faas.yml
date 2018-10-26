@@ -6,7 +6,11 @@ functions:
     lang: python3
     handler: ./src/info
     image: aude/4penguins-info:latest
+    environment:
+      content_type: application/json
   command:
     lang: python3
     handler: ./src/command
     image: aude/4penguins-command:latest
+    environment:
+      content_type: application/json
