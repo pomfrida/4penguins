@@ -8,4 +8,4 @@ def handle(req):
 
     data += '\n\n' + req
 
-    return req
+    return data
