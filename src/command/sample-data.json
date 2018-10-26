@@ -1,0 +1,76 @@
+{
+  "matchId": "d191f1cc-c179-4779-b649-af5e9dab198e",
+  "mapWidth": 20,
+  "mapHeight": 20,
+  "wallDamage": 30,
+  "penguinDamage": 50,
+  "weaponDamage": 60,
+  "visibility": 5,
+  "weaponRange": 5,
+  "you": {
+    "direction": "top",
+    "x": 29,
+    "y": 8,
+    "strength": 300,
+    "ammo": 995,
+    "status": "firing",
+    "targetRange": 4,
+    "weaponRange": 5,
+    "weaponDamage": 60
+  },
+  "enemies": [
+    {
+      "direction": "bottom",
+      "x": 29,
+      "y": 4,
+      "strength": 240,
+      "ammo": 1000,
+      "status": "hit",
+      "weaponRange": 5,
+      "weaponDamage": 60
+    }
+  ],
+  "walls": [
+    {
+      "x": 16,
+      "y": 7,
+      "strength": 200
+    },
+    {
+      "x": 18,
+      "y": 7,
+      "strength": 200
+    },
+    {
+      "x": 17,
+      "y": 7,
+      "strength": 200
+    },
+    {
+      "x": 15,
+      "y": 7,
+      "strength": 200
+    }
+  ],
+  "bonusTiles": [
+   {
+      "x": 12,
+      "y": 5,
+      "type": "weapon-range",
+      "value": 1
+  },
+  {
+      "x": 15,
+      "y": 11,
+      "type": "strength",
+      "value": 3
+  },
+  {
+      "x": 17,
+      "y": 10,
+      "type": "weapon-damage",
+      "value": 4
+  }],
+  "suddenDeath": 10,
+  "fire": []
+}
