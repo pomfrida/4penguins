@@ -52,14 +52,14 @@ class makeMove(object):
             return 'me'
         else:
             return 'enemy'
-    
+
     # Who has the most range?
     def superiorrange(self,enemyrange):
         if self.myrange > enemyrange:
             return 'me'
         else:
             return 'enemy'
-    
+
     # Who has the moset damage?
     def superiordamage(self,enemydamage):
         if self.mydamage > enemydamage:
@@ -73,7 +73,7 @@ class makeMove(object):
 
     def sethp(self, hp):
         self.hp = hp
-    
+
     def setdamage(self, damage):
         self.damage = damage
 
