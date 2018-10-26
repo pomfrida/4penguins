@@ -1,7 +1,5 @@
 import json
 
 def handle(req):
-    data = 'hello command'
-    data += '\n\n' + req
-
-    return data
+    data = {'command': 'advance'}
+    return json.dumps(data)

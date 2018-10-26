@@ -1,7 +1,9 @@
 import json
 
 def handle(req):
-    data = 'hello info'
-    data += '\n\n' + req
+    data = {
+        'name': 'linus',
+        'team': '4penguins',
+    }
 
-    return data
+    return json.dumps(data)
