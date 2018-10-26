@@ -2,7 +2,7 @@ provider:
   name: faas
   gateway: http://168.63.69.188
 functions:
-  4penguins:
+  penguins:
     lang: python3
     handler: ./src
     image: aude/4penguins:latest
