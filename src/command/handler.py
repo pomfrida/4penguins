@@ -12,6 +12,33 @@ actions = [
 ]
 
 def pingu_in_sight(data):
+    # get data about our pingu
+    d = data['you']['direction']
+    x = data['you']['x']
+    y = data['you']['y']
+
+    # get enemy pingus
+    enemies = data['enemies']
+
+    # check for bad pingus
+    for enemy in enemies:
+        # only process pingus that are in sight
+        if 'x' in enemy:
+
+            # check for bad pingu in our direction
+            if d == 'top':
+                if enemy['x'] == x and enemy['y'] < y:
+                    return True
+            if d == 'bottom':
+                if enemy['x'] == x and enemy['y'] > y:
+                    return True
+            if d == 'left':
+                if enemy['x'] < x and enemy['y'] == y:
+                    return True
+            if d == 'right':
+                if enemy['x'] > x and enemy['y'] == y:
+                    return True
+
     return False
 
 # Check for nearby objects
@@ -65,6 +92,7 @@ def handle(req):
 
     return json.dumps({'command': get_command(data)})
 
+# handle CLI
 if __name__ == '__main__':
     rawdata = sys.stdin.read()
 
