@@ -91,6 +91,8 @@ def is_road_dangerous(data, a, b):
 
 def is_tile_dangerous(data, x, y):
     # don't bump into walls
+    if x < 0 or y < 0 or x >= 20 or y >= 20:
+        return True
     for wall in data['walls']:
         if wall['x'] == x and wall['y'] == y:
             return True
