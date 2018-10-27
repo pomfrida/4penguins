@@ -2,17 +2,45 @@ import json
 import sys
 import random
 
-def is_dangerous(data, coords):
+actions = [
+    'rotate-left',
+    'rotate-right',
+    'advance',
+    'retreat',
+    'shoot',
+    'pass',
+]
+
+def pingu_in_sight(data):
     return False
 
-def get_coords_next(coords, i):
-    pass
+# Check for nearby objects
+def is_dangerous(data, action):
+    return False
 
-def walk(data):
-    pass
+def get_random_action(data):
+    # we don't want to do "pass"
+    unicorns = set(actions) - set(['pass'])
 
+    while True:
+        action = random.choice(tuple(unicorns))
+
+        if not is_dangerous(data, action):
+            break
+
+    return action
+
+def shoot(data):
+    return 'shoot'
+
+# The function that decides the move..
 def get_command(data):
-    return 'retreat'
+    # Sjekk om fienden ser på oss og om vi ser på dem (og vi kan skyte)
+    if pingu_in_sight(data):
+        # funksjon som kalles dersom vi er på linje sammen med fiende
+        return shoot(data)
+    else:
+        return get_random_action(data)
 
 def handle(req):
     """
