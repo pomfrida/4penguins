@@ -43,6 +43,57 @@ def pingu_in_sight(data):
 
 # Check for nearby objects
 def is_dangerous(data, action):
+    lions = ['advance', 'retreat']
+
+    if not action in lions:
+        return False
+
+    d = data['you']['direction']
+    x = data['you']['x']
+    y = data['you']['y']
+
+    # if going forward, check that we don't bump our nose
+    if action == 'advance':
+        if d == 'top':
+            xn = x
+            yn = y + 1
+        if d == 'bottom':
+            xn = x
+            yn = y + 1
+        if d == 'left':
+            xn = x - 1
+            yn = y
+        if d == 'right':
+            xn = x + 1
+            yn = y
+
+    # if going backward, check that we don't bump our butt
+    if action == 'retreat':
+        if d == 'top':
+            xn = x
+            yn = y + 1
+        if d == 'bottom':
+            xn = x
+            yn = y - 1
+        if d == 'left':
+            xn = x + 1
+            yn = y
+        if d == 'right':
+            xn = x - 1
+            yn = y
+
+    # don't bump into walls
+    for wall in data['walls']:
+        if wall['x'] == xn and wall['y'] == yn:
+            return True
+
+    # don't bump into pengulinis
+    for enemy in data['enemies']:
+        # only process pingus that are in sight
+        if 'x' in enemy:
+            if enemy['x'] == xn and enemy['y'] == yn:
+                return True
+
     return False
 
 def get_random_action(data):
