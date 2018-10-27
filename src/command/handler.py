@@ -55,20 +55,16 @@ def snacks_in_sight(data):
         # check for snack in our direction
         if d == 'top':
             if snack['x'] == x and snack['y'] < y:
-                if not is_road_dangerous(data, [x, y], [snack['x'], snack['y']]):
-                    return True
+                return True
         if d == 'bottom':
             if snack['x'] == x and snack['y'] > y:
-                if not is_road_dangerous(data, [x, y], [snack['x'], snack['y']]):
-                    return True
+                return True
         if d == 'left':
             if snack['x'] < x and snack['y'] == y:
-                if not is_road_dangerous(data, [x, y], [snack['x'], snack['y']]):
-                    return True
+                return True
         if d == 'right':
             if snack['x'] > x and snack['y'] == y:
-                if not is_road_dangerous(data, [x, y], [snack['x'], snack['y']]):
-                    return True
+                return True
 
     return False
 
@@ -123,7 +119,7 @@ def is_dangerous(data, action):
     if action == 'advance':
         if d == 'top':
             xn = x
-            yn = y + 1
+            yn = y - 1
         if d == 'bottom':
             xn = x
             yn = y + 1
@@ -151,9 +147,16 @@ def is_dangerous(data, action):
 
     return is_tile_dangerous(data, xn, yn)
 
+def advance_no_matter_what(data):
+    if is_dangerous(data, 'advance'):
+        return attack(data)
+    else:
+        return 'advance'
+
 def get_random_action(data):
     # we don't want to do "pass"
-    unicorns = set(actions) - set(['pass'])
+    # no need to shoot either, we handle that in snack hunting
+    unicorns = set(actions) - set(['pass', 'shoot'])
 
     while True:
         action = random.choice(tuple(unicorns))
@@ -173,7 +176,7 @@ def get_command(data):
         # funksjon som kalles dersom vi er på linje sammen med fiende
         return attack(data)
     elif snacks_in_sight(data):
-        return 'advance'
+        return advance_no_matter_what(data)
     else:
         return get_random_action(data)
 
