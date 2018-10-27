@@ -156,10 +156,15 @@ def advance_no_matter_what(data):
 def get_random_action(data):
     # we don't want to do "pass"
     # no need to shoot either, we handle that in snack hunting
-    unicorns = set(actions) - set(['pass', 'shoot'])
+    # "retreat" looks lame
+    unicorns = list(set(actions) - set(['pass', 'shoot', 'retreat']))
+
+    # add more weight to 'advance'
+    unicorns.append('advance')
+    unicorns.append('advance')
 
     while True:
-        action = random.choice(tuple(unicorns))
+        action = random.choice(unicorns)
 
         if not is_dangerous(data, action):
             break
