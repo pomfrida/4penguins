@@ -1,35 +1,18 @@
 import json
 import sys
-from makeMove import makeMove
+import random
+
+def is_dangerous(data, coords):
+    return False
+
+def get_coords_next(coords, i):
+    pass
 
 def walk(data):
     pass
 
 def get_command(data):
-    print(data)
-    doer = makeMove(
-        mypos    = [data['you']['x'], data['you']['y']],
-        mydir    = data['you']['direction'],
-        myhp     = data['you']['strength'],
-        myrange  = data['you']['weaponRange'],
-        mydamage = data['you']['weaponDamage'],
-    )
-
-    action = doer.doSomething(
-        enemydata = [
-            data['enemies'][0]['x'], data['enemies'][0]['y'],
-            data['enemies'][0]['strength'],
-            data['enemies'][0]['direction'],
-            data['enemies'][0]['ammo'],
-            data['enemies'][0]['weaponRange'],
-            data['enemies'][0]['weaponDamage'],
-        ],
-        bonusdata = True,
-        walls     = True,
-        fire      = True,
-    )
-
-    return action
+    return 'retreat'
 
 def handle(req):
     """
