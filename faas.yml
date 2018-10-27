@@ -1,6 +1,6 @@
 provider:
   name: faas
-  gateway: https://penguins.bouvetapps.io
+  gateway: https://pingu.bouvetapps.io
 functions:
   info:
     lang: python3
