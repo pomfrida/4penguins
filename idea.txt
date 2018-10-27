@@ -1,0 +1,7 @@
+HVIS vi ser på en fiende, SKYYYT!!!
+
+få en random neste action
+
+if dangerous:
+    try again
+
