@@ -11,3 +11,7 @@ push: build
 .PHONY: deploy
 deploy: push
 	faas-cli deploy -f $(CONF_FILE)
+
+.PHONY: test
+test:
+	python src/command/handler.py < sample-data.json

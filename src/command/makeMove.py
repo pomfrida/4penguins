@@ -84,41 +84,41 @@ class makeMove(object):
     def doSomething(self,enemydata,bonusdata,walls,fire):
         moves = ['rotate-left', 'rotate-right', 'advance', 'return', 'shoot', 'pass']
 
-        #
-        walls = []
+        ##
+        #walls = []
 
-        isnear          = False
+        #isnear          = False
 
-        if len(enemydata) == 1:
-            enemyhp     = enemydata
-        else:
-            enemypos    = enemydata[0,1]
-            enemyhp     = enemydata[2]
-            enemydir    = enemydata[3]
-            enemyammo   = enemydata[4] #cant see how it should be useful?
-            enemyrange  = enemydata[5]
-            enemydamage = enemydata[6]
-            isnear      = True
+        #if len(enemydata) == 1:
+        #    enemyhp     = enemydata
+        #else:
+        #    enemypos    = enemydata[0,1]
+        #    enemyhp     = enemydata[2]
+        #    enemydir    = enemydata[3]
+        #    enemyammo   = enemydata[4] #cant see how it should be useful?
+        #    enemyrange  = enemydata[5]
+        #    enemydamage = enemydata[6]
+        #    isnear      = True
 
-        cont = True
-        todo = []
+        #cont = True
+        #todo = []
 
-        where, distance = self.nearby(enemypos) # only returns one
+        #where, distance = self.nearby(enemypos) # only returns one
 
-        if where == 'r' and self.mydir == 'left' or where == 'l' and self.mydir == 'right':
-            status, margin = self.indanger(distance, enemyrange)
-            if status == 'danger':
-                todo = [2,3]
-            else:
-                todo = [1,2,3,4]
+        #if where == 'r' and self.mydir == 'left' or where == 'l' and self.mydir == 'right':
+        #    status, margin = self.indanger(distance, enemyrange)
+        #    if status == 'danger':
+        #        todo = [2,3]
+        #    else:
+        #        todo = [1,2,3,4]
 
-        elif where == 'f' and self.mydir == 'bottom' or where == 'b' and self.mydir == 'front':
-            status, margin = self.indanger(distance, enemyrange)
-            todo = 4
-            cont = False
+        #elif where == 'f' and self.mydir == 'bottom' or where == 'b' and self.mydir == 'front':
+        #    status, margin = self.indanger(distance, enemyrange)
+        #    todo = 4
+        #    cont = False
 
-        #if cont == True:
-        #    where, distance = self.isnear(wall)
+        ##if cont == True:
+        ##    where, distance = self.isnear(wall)
 
 
         rnd = random.randint(0, 5)
