@@ -41,6 +41,69 @@ def pingu_in_sight(data):
 
     return False
 
+def snacks_in_sight(data):
+    # get data about our pengpeng
+    d = data['you']['direction']
+    x = data['you']['x']
+    y = data['you']['y']
+
+    # get snacks
+    snacks = data['bonusTiles']
+
+    # are we looking at one? :P
+    for snack in snacks:
+        # check for snack in our direction
+        if d == 'top':
+            if snack['x'] == x and snack['y'] < y:
+                return True
+        if d == 'bottom':
+            if snack['x'] == x and snack['y'] > y:
+                return True
+        if d == 'left':
+            if snack['x'] < x and snack['y'] == y:
+                return True
+        if d == 'right':
+            if snack['x'] > x and snack['y'] == y:
+                return True
+
+    return False
+
+# finds out if the files from, but not including, a to, and including, b are clear
+def is_road_dangerous(data, a, b):
+    # [5,3] [5,4]
+    #
+    # [9,9] [9,8]
+    #
+    # [4,4] [1,4]
+
+    # if a[0] == b[0]:
+
+    # if a[1] == b[1]:
+    #     rf = a[0]
+    #     rt = b[0]
+
+    for i in range(a[0], b[0]):
+        print(i)
+    for i in range(a[1], b[1]):
+        print(i)
+
+    return False
+
+def is_tile_dangerous(data, x, y):
+    # don't bump into walls
+    for wall in data['walls']:
+        if wall['x'] == x and wall['y'] == y:
+            return True
+
+    # don't bump into pengulinis
+    for enemy in data['enemies']:
+        # only process pingus that are in sight
+        if 'x' in enemy:
+            if enemy['x'] == x and enemy['y'] == y:
+                return True
+
+    return False
+
 # Check for nearby objects
 def is_dangerous(data, action):
     lions = ['advance', 'retreat']
@@ -56,7 +119,7 @@ def is_dangerous(data, action):
     if action == 'advance':
         if d == 'top':
             xn = x
-            yn = y + 1
+            yn = y - 1
         if d == 'bottom':
             xn = x
             yn = y + 1
@@ -82,23 +145,18 @@ def is_dangerous(data, action):
             xn = x - 1
             yn = y
 
-    # don't bump into walls
-    for wall in data['walls']:
-        if wall['x'] == xn and wall['y'] == yn:
-            return True
+    return is_tile_dangerous(data, xn, yn)
 
-    # don't bump into pengulinis
-    for enemy in data['enemies']:
-        # only process pingus that are in sight
-        if 'x' in enemy:
-            if enemy['x'] == xn and enemy['y'] == yn:
-                return True
-
-    return False
+def advance_no_matter_what(data):
+    if is_dangerous(data, 'advance'):
+        return attack(data)
+    else:
+        return 'advance'
 
 def get_random_action(data):
     # we don't want to do "pass"
-    unicorns = set(actions) - set(['pass'])
+    # no need to shoot either, we handle that in snack hunting
+    unicorns = set(actions) - set(['pass', 'shoot'])
 
     while True:
         action = random.choice(tuple(unicorns))
@@ -108,7 +166,7 @@ def get_random_action(data):
 
     return action
 
-def shoot(data):
+def attack(data):
     return 'shoot'
 
 # The function that decides the move..
@@ -116,7 +174,9 @@ def get_command(data):
     # Sjekk om fienden ser på oss og om vi ser på dem (og vi kan skyte)
     if pingu_in_sight(data):
         # funksjon som kalles dersom vi er på linje sammen med fiende
-        return shoot(data)
+        return attack(data)
+    elif snacks_in_sight(data):
+        return advance_no_matter_what(data)
     else:
         return get_random_action(data)
 
